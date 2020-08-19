@@ -1,14 +1,31 @@
+/*
+Creator: Nighthawk Coding Society
+Mini Lab Name: Monkey Jumpers
+Level: Easy
+*/
 package com.examples.helloseries;
 
 import java.util.HashMap;
 
 /*
-Primary Class for this file is a driver for the MonkeyList class, which sets up a list of MonkeyObject
- */
+    How to build Monkey Jumper rhyme in code (OOP Programming Style)
+    1. Build the entire rhyme Ten to One monkey in countdown, see sample
+    2. Look at and learn about variable assignments
+    3. Study class and list of classes
+    4. Study HashMap
+*/
 public class MonkeyJumpersL2Classy {
     public static void main(String[] args) {
-        MonkeyList mlist = new MonkeyList();
-        mlist.printPoem();
+        oop(); // introduction to method (this example is more like a function, why?)
+        //how would you print these monkeys vertically?
+        //add names to the monkeys
+        //change list to ArrayList and make implementation dynamic, prove it!
+        //build a project with your logo, ascii art with animation (run in shell)
+    }
+
+    public static void oop() {
+        MonkeyList monkeyList = new MonkeyList();
+        monkeyList.printPoem();
     }
 }
 

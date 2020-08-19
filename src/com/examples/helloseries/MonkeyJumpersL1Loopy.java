@@ -1,25 +1,24 @@
-package com.examples.helloseries;
 /*
 Creator: Nighthawk Coding Society
 Mini Lab Name: Monkey Jumpers
 Level: Easy
 */
+package com.examples.helloseries;
 
 /*
 How to build Monkey Jumper rhyme in code (Imperative Programming Style)
 1. Build the entire rhyme Ten to One monkey in countdown, see sample
 2. Look at and learn about variable assignments
 3. Study loops and zero based counting
-4. The challenge is to understand how to create a two-dimensional structure and referencing elements
+4. Study two-dimensional array and referencing elements
 */
-
 public class MonkeyJumpersL1Loopy {
 
     public static void main(String[] args) {
-        iterative();  // introduction to method (this example is more like a function, why?)
-        //how would you print them horizontally?
-        //think about monkeys as an object and jumping as an action
-        //each monkey needs static, action, falling off state
+        iterative();
+        //how would you print these monkeys horizontally?
+        //add a name to the monkeys and print either on top or below
+        //start to think about a monkey as an object versus two-dimensional array
     }
 
     public static void iterative()
@@ -59,10 +58,10 @@ public class MonkeyJumpersL1Loopy {
                 },
                 //Monkey 4
                 {
-                        "(◕‿◕✿) ",          //[4][0]
-                        "\\_⍾_/ ",          //[4][1]
-                        "==4==  ",          //[4][2]
-                        "_/ \\_ "           //[4][3]
+                        "  (◕‿◕✿) ",          //[4][0]
+                        "  \\_⍾_/ ",          //[4][1]
+                        "  ==4==  ",          //[4][2]
+                        "  _/ \\_ "           //[4][3]
                 },
 
         };
