@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 /*
     How to build Monkey Jumper rhyme in code (OOP Programming Style)
-    1. Build the entire rhyme Ten to One monkey in countdown, see sample
-    2. Look at and learn about variable assignments
-    3. Study class and list of classes
+    1. Build the entire rhyme Seven to One monkey in countdown, see sample
+    2. Look at and learn about constructors
+    3. Study monkey object and list of monkeys
     4. Study HashMap
     5. Look at StringBuilder
 */
