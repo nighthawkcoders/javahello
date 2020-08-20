@@ -13,17 +13,19 @@ import java.util.HashMap;
     2. Look at and learn about variable assignments
     3. Study class and list of classes
     4. Study HashMap
+    5. Look at StringBuilder
 */
 public class MonkeyJumpersL2Classy {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         oop(); // introduction to method (this example is more like a function, why?)
         //how would you print these monkeys vertically?
         //add names to the monkeys
         //change list to ArrayList and make implementation dynamic, prove it!
-        //build a project with your logo, ascii art with animation (run in shell)
+        //build a project with your ascii/unicode art logo, experiment with animation
+        //run you logo from shell (deployed java)
     }
 
-    public static void oop() {
+    public static void oop() throws InterruptedException {
         MonkeyList monkeyList = new MonkeyList();
         monkeyList.printPoem();
     }
@@ -44,28 +46,44 @@ class MonkeyList {
         //setup and array of monkeys
         monkeys[count++] = new MonkeyObject();   //Default Monkey
         monkeys[count++] = new MonkeyObject(
-                " ʕ༼ ◕_◕ ༽ʔ",
-                "  \\_⎏_/  ",
-                "  ++1++  ",
-                "   ⌋ ⌊   "
-        );
-        monkeys[count++] = new MonkeyObject(
-                " ʕ(▀ ⍡ ▀)ʔ",
-                "  \\_⎐_/ ",
-                "  <-2->  ",
+                 "ʕ༼ ◕_◕ ༽ʔ",
+                 "  \\_⎏_/ ",
+                "  ++1++ ",
+                 "   ⌋ ⌊  ",
+                "ʕ༼ ◕_◕ ༽ʔ",
+                "  \\___/ ",
+                "  +++++ ",
                 "  〈  〉 "
         );
         monkeys[count++] = new MonkeyObject(
-                "ʕ ͡° ͜ʖ ° ͡ʔ",
-                "  \\_⍾_/  ",
-                "  ==3==  ",
-                "  _/ \\_  "
+                "ʕ(▀ ⍡ ▀)ʔ",
+                "  \\___/ ",
+                "  <-2-> ",
+                "  〈  〉 ",
+                "ʕ(▀ ⍡ ▀)ʔ",
+                "  \\_⎐_/ ",
+                "  <--->  ",
+                "   ⌋  ⌊  "
         );
         monkeys[count++] = new MonkeyObject(
-                "  (◕‿◕✿) ",
-                "  \\_⍾_/ ",
-                "  ==4==  ",
-                "  _/ \\_  "
+                " ʕ ͡° ͜ʖ ° ͡ʔ ",
+                "   \\___/",
+                "   ==3== ",
+                "   _/ \\_",
+                " ʕ ͡° ͜ʖ ° ͡ʔ ",
+                "   \\_⍾_/ ",
+                "   ===== ",
+                "   〈  〉 "
+        );
+        monkeys[count++] = new MonkeyObject(
+                " ʕ(◕‿◕✿)ʔ ",
+                "   \\_⍾_/ ",
+                "   ==4==  ",
+                "   _/ \\_  ",
+                " ʕ(◕‿◕✿)ʔ ",
+                "   \\___/  ",
+                "   =====  ",
+                "    〈  〉  "
         );
 
     }
@@ -86,11 +104,10 @@ class MonkeyList {
     Method to extract and print same body part for all monkeys in list
      */
     private void printBodyPart(int start, int end, String bp) {
-
         //build output string
         StringBuilder line_for_output = new StringBuilder();
         for (int i = start; i < end; i++) {
-            line_for_output.append(monkeys[i].getBodyPart(bp)).append("\t");
+            line_for_output.append(String.format("%-12s \t", monkeys[i].getBodyPart(bp)));
         }
         System.out.println(line_for_output);
     }
@@ -98,18 +115,33 @@ class MonkeyList {
     /*
     Method to support countdown song.
      */
-    public void printPoem() {
+    public void printPoem() throws InterruptedException {
         //prints starting message
         System.out.println("Monkey Jumpers Poem in Java Classy");
 
         //loop is key logic to allow printing monkeys horizontally according to countdown criteria
         for (int i = count; i >= 1; i--)   //start countdown according to monkeys in list
         {
-            System.out.println(i + " little monkeys jumping on the bed...");
-            printBodyPart(0, i, MonkeyObject.eyes);
-            printBodyPart(0, i, MonkeyObject.chin);
-            printBodyPart(0, i, MonkeyObject.body);
-            printBodyPart(0, i, MonkeyObject.legs);
+            int delay = 3500; int delay_step = 700; boolean toggle = true;
+            for (int sleep = 0; sleep < delay; sleep += delay_step ) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                System.out.println(i + " little monkeys jumping on the bed...");
+
+                if (toggle) {
+                    printBodyPart(0, i, MonkeyObject.eyes);
+                    printBodyPart(0, i, MonkeyObject.chin);
+                    printBodyPart(0, i, MonkeyObject.body);
+                    printBodyPart(0, i, MonkeyObject.legs);
+                } else {
+                    printBodyPart(0, i, MonkeyObject.eyes2);
+                    printBodyPart(0, i, MonkeyObject.chin2);
+                    printBodyPart(0, i, MonkeyObject.body2);
+                    printBodyPart(0, i, MonkeyObject.legs2);
+                }
+                Thread.sleep(delay_step);   //delay
+                toggle = !toggle;           //flip toggle
+            }
         }
 
         //prints finishing messages
@@ -130,6 +162,10 @@ class MonkeyObject {
     static public final String chin = "chin";
     static public final String body = "body";
     static public final String legs = "legs";
+    static public final String eyes2 = "eyes2";
+    static public final String chin2 = "chin2";
+    static public final String body2 = "body2";
+    static public final String legs2 = "legs2";
 
     //Monkey 'body parts' data table
     //In CompSci this is more typically called a Name-Value pair
@@ -139,19 +175,28 @@ class MonkeyObject {
     //Default monkey constructor has initial set of values, this is put in place to avoid empty set scenarios
     public MonkeyObject() {
         //Add elements to the data table
-        monkey.put(eyes, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
-        monkey.put(chin, "  \\_⏄_/  ");
-        monkey.put(body, "  --0--   ");
-        monkey.put(legs, "  ⎛   ⎞   ");
+        monkey.put(eyes,  "ʕง ͠° ͟ل͜ ͡°)ʔ ");
+        monkey.put(chin,  "  \\_⏄_/ ");
+        monkey.put(body,  "  --0--  ");
+        monkey.put(legs,  "  ⎛  ⎞   ");
+        monkey.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
+        monkey.put(chin2, "  \\___/ ");
+        monkey.put(body2, "  -----  ");
+        monkey.put(legs2, "  ⌋  ⌊  " );
     }
 
     //A constructor with parameters to make your own monkey values
-    public MonkeyObject(String eyes, String chin, String body, String legs){
+    public MonkeyObject(String eyes, String chin, String body, String legs,
+                        String eyes2, String chin2, String body2, String legs2) {
         // Add elements to the map
         monkey.put(MonkeyObject.eyes, eyes);
         monkey.put(MonkeyObject.chin, chin);
         monkey.put(MonkeyObject.body, body);
         monkey.put(MonkeyObject.legs, legs);
+        monkey.put(MonkeyObject.eyes2, eyes2);
+        monkey.put(MonkeyObject.chin2, chin2);
+        monkey.put(MonkeyObject.body2, body2);
+        monkey.put(MonkeyObject.legs2, legs2);
     }
 
     //Override of toString, this most commonly used by System.out.println to get sensible data instead of an object
