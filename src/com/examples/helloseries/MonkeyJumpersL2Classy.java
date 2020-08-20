@@ -37,7 +37,7 @@ Class manages a list of monkeys
  */
 class MonkeyList {
     int count = 0;
-    MonkeyObject[] monkeys = new MonkeyObject[10]; //an array of Monkeys
+    Monkey[] monkeys = new Monkey[10]; //an array of Monkeys
 
     /*
     Constructor initializes a list monkey object
@@ -46,16 +46,16 @@ class MonkeyList {
 
         //setup and array of monkeys
         //1st
-        monkeys[count++] = new MonkeyObject(true );  //Default Monkey and update list count
+        monkeys[count++] = new Monkey(true );  //Default Monkey and update list count
         //2nd
-        monkeys[count] = new MonkeyObject();    //All other Monkeys use setters to update monkey parts
-        monkeys[count].setMonkey(
+        monkeys[count] = new Monkey();    //All other Monkeys use setters to update monkey parts
+        monkeys[count].setAnimeStandard(
              "ʕ༼ ◕_◕ ༽ʔ",
              "  \\_⎏_/ ",
             "  ++1++ ",
              "   ⌋ ⌊  "
         );
-        monkeys[count].setMonkeyAnime(
+        monkeys[count].setAnimeAlternate(
             "ʕ༼ ◕_◕ ༽ʔ",
             "  \\___/ ",
             "  +++++ ",
@@ -64,14 +64,14 @@ class MonkeyList {
         count++;
 
         //3rd
-        monkeys[count] = new MonkeyObject();
-        monkeys[count].setMonkey(
+        monkeys[count] = new Monkey();
+        monkeys[count].setAnimeStandard(
             "ʕ(▀ ⍡ ▀)ʔ",
             "  \\___/ ",
             "  <-2-> ",
             "  〈  〉 "
         );
-        monkeys[count].setMonkeyAnime(
+        monkeys[count].setAnimeAlternate(
             "ʕ(▀ ⍡ ▀)ʔ",
             "  \\_⎐_/ ",
             "  <--->  ",
@@ -80,14 +80,14 @@ class MonkeyList {
         count++;
 
         //4th
-        monkeys[count] = new MonkeyObject();
-        monkeys[count].setMonkey(
+        monkeys[count] = new Monkey();
+        monkeys[count].setAnimeStandard(
             " ʕ ͡° ͜ʖ ° ͡ʔ ",
             "   \\___/",
             "   ==3== ",
             "   _/ \\_"
         );
-        monkeys[count].setMonkeyAnime(
+        monkeys[count].setAnimeAlternate(
             " ʕ ͡° ͜ʖ ° ͡ʔ ",
             "   \\_⍾_/ ",
             "   ===== ",
@@ -96,18 +96,18 @@ class MonkeyList {
         count++;
 
         //5th
-        monkeys[count] = new MonkeyObject();
-        monkeys[count].setMonkey(
+        monkeys[count] = new Monkey();
+        monkeys[count].setAnimeStandard(
             " ʕ(◕‿◕✿)ʔ ",
             "   \\_⍾_/ ",
             "   ==4==  ",
             "   _/ \\_  "
         );
-        monkeys[count].setMonkeyAnime(
+        monkeys[count].setAnimeAlternate(
             " ʕ(◕‿◕✿)ʔ ",
             "   \\___/  ",
             "   =====  ",
-            "    〈  〉  "
+            "   〈  〉  "
         );
         count++;
     }
@@ -117,7 +117,7 @@ class MonkeyList {
      */
     public void print() {
         //setup loop to initialize each monkey
-        for (MonkeyObject monkey : monkeys) {
+        for (Monkey monkey : monkeys) {
             if (monkey != null) {   // check to see if monkey is initialized
                 System.out.println(monkey);
             }
@@ -131,7 +131,7 @@ class MonkeyList {
         //build output string
         StringBuilder line_for_output = new StringBuilder();
         for (int i = start; i < end; i++) {
-            line_for_output.append(String.format("%-12s \t", monkeys[i].getBodyPart(bp)));
+            line_for_output.append(String.format("%-12s \t", monkeys[i].getAnimePart(bp)));
         }
         System.out.println(line_for_output);
     }
@@ -163,10 +163,10 @@ class MonkeyList {
                 System.out.flush();
                 System.out.println(i + " little monkeys jumping on the bed...");
 
-                printBodyPart(0, i, MonkeyObject.eyes);
-                printBodyPart(0, i, MonkeyObject.chin);
-                printBodyPart(0, i, MonkeyObject.body);
-                printBodyPart(0, i, MonkeyObject.legs);
+                printBodyPart(0, i, Monkey.eyes);
+                printBodyPart(0, i, Monkey.chin);
+                printBodyPart(0, i, Monkey.body);
+                printBodyPart(0, i, Monkey.legs);
 
                 Thread.sleep(delay_step);           //delay
                 toggle = !toggle;                   //toggle value flips each pass
@@ -181,52 +181,95 @@ class MonkeyList {
 
 }
 
-class Anime {
+abstract class Anime {
+    //Anime data table
+    //In CompSci HashMap is more well known as a Name-Value pair
+    //First string in HashMap is Name, Second string is Unicode value
+    //-- in Anime we will typically use this to store part of the figure (eyes, legs, ,..)
+    protected HashMap<String, String> anime;
 
+    //Dictionary names of elements in Monkey 'body parts' data table
+    //We share these names (public), but no one should every change value (final)
+    static private final String name0 = "n0", name1 = "n1", name2 = "n2", name3 = "n3", name4 = "n4";
+    static protected final String[] std_dictionary = { name0, name1, name2, name3, name4 };
+    static protected final String[] alt_dictionary = { "a-n0", "a-n", "a-n2", "a-n3", "a-n4" };
+    //Animation control variables
+    boolean animation = false;  //animation is on
+    boolean standard = true;    //standard is used to flip, standard -> animation -> standard
+
+    //Object constructor
+    public Anime () {
+        anime = new HashMap<>();
+    }
+
+    /*
+     "setter" that allow user to control standard or animated output from "getters"
+      */
+    public void setAnime(boolean on) {
+        this.standard = !on;
+    }
+
+    /*
+    standard "setter" is used to initialize standard values of the monkey
+     */
+    public void setAnimeStandard(String value0, String value1, String value2, String value3) {
+        anime.put(name0, value0);
+        anime.put(name1, value1);
+        anime.put(name2, value2);
+        anime.put(name3, value3);
+    }
+
+    /*
+    alternate "setter" is used to initialize standard values of the monkey
+     */
+    public void setAnimeAlternate(String value0, String value1, String value2, String value3) {
+        this.animation = true;  //if you use this "setter" animation is implied
+        anime.put(alt_dictionary[0], value0);
+        anime.put(alt_dictionary[1], value1);
+        anime.put(alt_dictionary[2], value2);
+        anime.put(alt_dictionary[3], value3);
+    }
+
+    /*
+    This "getter" allows the extraction of a single monkey body part
+     */
+    public String getAnimePart(String dictName) {
+        String lookup = dictName;
+
+        //animation control
+        if (!this.standard) {
+            switch (dictName) {
+                case name0 -> lookup = alt_dictionary[0];
+                case name1 -> lookup = alt_dictionary[1];
+                case name2 -> lookup = alt_dictionary[2];
+                case name3 -> lookup = alt_dictionary[3];
+                default -> throw new IllegalStateException("Unexpected value: " + dictName);
+            }
+        }
+        return anime.get(lookup);
+    }
 }
 
 /*
 Class contains properties of a single Monkey
  */
-class MonkeyObject {
-    //Dictionary names of elements in Monkey 'body parts' data table
-    //We share these names (public), but no one should every change value (final)
-    static public final String eyes = "eyes";
-    static public final String chin = "chin";
-    static public final String body = "body";
-    static public final String legs = "legs";
-    //Animation body parts, slight variations
-    static public final String eyes2 = "eyes2";
-    static public final String chin2 = "chin2";
-    static public final String body2 = "body2";
-    static public final String legs2 = "legs2";
-
-    //Monkey 'body parts' data table
-    //In CompSci this is more typically called a Name-Value pair
-    //First string in HashMap is Name (eyes, chin, ...), Second string is Unicode value
-    HashMap<String, String> monkey = new HashMap<>();
-
-    //Animation control variables
-    boolean anime = false;      //animation is on
-    boolean standard = true;    //standard is used to flip, standard -> animation -> standard
+class Monkey extends Anime {
+    //These final values can be used publicly to easy setting off values
+    static public final String eyes = Anime.std_dictionary[0];
+    static public final String chin = Anime.std_dictionary[1];
+    static public final String body = Anime.std_dictionary[2];
+    static public final String legs = Anime.std_dictionary[3];
+    //These final values limite in scope to this method
+    static private final String eyes2 = Anime.alt_dictionary[0];
+    static private final String chin2 = Anime.alt_dictionary[1];
+    static private final String body2 = Anime.alt_dictionary[2];
+    static private final String legs2 = Anime.alt_dictionary[3];
 
     /*
     Constructor establishes initial set of values, this avoids empty monkey scenarios
      */
-    public MonkeyObject() {
+    public Monkey() {
         this.MonkeyInit();
-    }
-
-    /*
-    Constructor establishes standard and alternate values for monkey body parts
-    */
-    public MonkeyObject(boolean anime) {
-        this.MonkeyInit();
-        this.anime = true;
-        monkey.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
-        monkey.put(chin2, "  \\___/ ");
-        monkey.put(body2, "  -----  ");
-        monkey.put(legs2, "  ⌋   ⌊ " );
     }
 
     /*
@@ -234,38 +277,22 @@ class MonkeyObject {
      */
     private void MonkeyInit() {
         //Add elements to the data table
-        monkey.put(eyes,  "ʕง ͠° ͟ل͜ ͡°)ʔ ");
-        monkey.put(chin,  "  \\_⏄_/ ");
-        monkey.put(body,  "  --0--  ");
-        monkey.put(legs,  "  ⎛   ⎞  ");
+        anime.put(eyes,  "ʕง ͠° ͟ل͜ ͡°)ʔ ");
+        anime.put(chin,  "  \\_⏄_/ ");
+        anime.put(body,  "  --0--  ");
+        anime.put(legs,  "  ⎛   ⎞  ");
     }
 
     /*
-    "setter" is used to initialize standard values of the monkey
-     */
-    public void setMonkey(String eyes, String chin, String body, String legs) {
-        monkey.put(MonkeyObject.eyes, eyes);
-        monkey.put(MonkeyObject.chin, chin);
-        monkey.put(MonkeyObject.body, body);
-        monkey.put(MonkeyObject.legs, legs);
-    }
-
-    /*
-    2nd "setter" is used to initialize alternate values of monkey
-     */
-    public void setMonkeyAnime(String eyes, String chin, String body, String legs) {
-        this.anime = true;  //if you use this "setter" animation is implied
-        monkey.put(MonkeyObject.eyes2, eyes);
-        monkey.put(MonkeyObject.chin2, chin);
-        monkey.put(MonkeyObject.body2, body);
-        monkey.put(MonkeyObject.legs2, legs);
-    }
-
-    /*
-    "setter" that allow user to control standard or animated output from "getters"
-     */
-    public void setAnime(boolean on) {
-        this.standard = !on;
+    Constructor establishes standard and alternate values for monkey body parts
+    */
+    public Monkey(boolean animation) {
+        this.MonkeyInit();
+        this.animation = animation;
+        anime.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
+        anime.put(chin2, "  \\___/ ");
+        anime.put(body2, "  -----  ");
+        anime.put(legs2, "  ⌋   ⌊ " );
     }
 
     /*
@@ -278,39 +305,14 @@ class MonkeyObject {
 
         //control support toggling output string
         if (this.standard)  //standard out
-            out_string = monkey.get(eyes) + "\n" + monkey.get(chin) + "\n" + monkey.get(body) + "\n" + monkey.get(legs)+ "\n";
+            out_string = anime.get(eyes) + "\n" + anime.get(chin) + "\n" + anime.get(body) + "\n" + anime.get(legs)+ "\n";
         else                //alternate out
-            out_string = monkey.get(eyes2) + "\n" + monkey.get(chin2) + "\n" + monkey.get(body2) + "\n" + monkey.get(legs2)+ "\n";
+            out_string = anime.get(eyes2) + "\n" + anime.get(chin2) + "\n" + anime.get(body2) + "\n" + anime.get(legs2)+ "\n";
 
         //if user sets anime, then this toggles between standard and alternate output
-        if (this.anime) this.standard = !this.standard;
+        if (this.animation) this.standard = !this.standard;
 
         return out_string;
     }
 
-    /*
-    "getter" is a commonly expected method used to return data from an Object
-     */
-    public String getMonkey() {
-        return toString();
-    }
-
-    /*
-    This "getter" allows the extraction of a single monkey body part
-     */
-    public String getBodyPart(String bp) {
-        String tag = bp;
-
-        //animation control
-        if (!this.standard) {
-            switch (bp) {
-                case eyes -> tag = eyes2;
-                case chin -> tag = chin2;
-                case body -> tag = body2;
-                case legs -> tag = legs2;
-                default -> throw new IllegalStateException("Unexpected value: " + bp);
-            }
-        }
-        return monkey.get(tag);
-    }
 }
