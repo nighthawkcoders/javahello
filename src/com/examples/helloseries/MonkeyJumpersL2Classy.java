@@ -45,48 +45,71 @@ class MonkeyList {
     public MonkeyList() {
 
         //setup and array of monkeys
-        monkeys[count++] = new MonkeyObject();   //Default Monkey
-        monkeys[count++] = new MonkeyObject(
-                 "ʕ༼ ◕_◕ ༽ʔ",
-                 "  \\_⎏_/ ",
-                "  ++1++ ",
-                 "   ⌋ ⌊  ",
-                "ʕ༼ ◕_◕ ༽ʔ",
-                "  \\___/ ",
-                "  +++++ ",
-                "  〈  〉 "
+        //1st
+        monkeys[count++] = new MonkeyObject(true );  //Default Monkey and update list count
+        //2nd
+        monkeys[count] = new MonkeyObject();    //All other Monkeys use setters to update monkey parts
+        monkeys[count].setMonkey(
+             "ʕ༼ ◕_◕ ༽ʔ",
+             "  \\_⎏_/ ",
+            "  ++1++ ",
+             "   ⌋ ⌊  "
         );
-        monkeys[count++] = new MonkeyObject(
-                "ʕ(▀ ⍡ ▀)ʔ",
-                "  \\___/ ",
-                "  <-2-> ",
-                "  〈  〉 ",
-                "ʕ(▀ ⍡ ▀)ʔ",
-                "  \\_⎐_/ ",
-                "  <--->  ",
-                "   ⌋  ⌊  "
+        monkeys[count].setMonkeyAnime(
+            "ʕ༼ ◕_◕ ༽ʔ",
+            "  \\___/ ",
+            "  +++++ ",
+            "  〈  〉 "
         );
-        monkeys[count++] = new MonkeyObject(
-                " ʕ ͡° ͜ʖ ° ͡ʔ ",
-                "   \\___/",
-                "   ==3== ",
-                "   _/ \\_",
-                " ʕ ͡° ͜ʖ ° ͡ʔ ",
-                "   \\_⍾_/ ",
-                "   ===== ",
-                "   〈  〉 "
-        );
-        monkeys[count++] = new MonkeyObject(
-                " ʕ(◕‿◕✿)ʔ ",
-                "   \\_⍾_/ ",
-                "   ==4==  ",
-                "   _/ \\_  ",
-                " ʕ(◕‿◕✿)ʔ ",
-                "   \\___/  ",
-                "   =====  ",
-                "    〈  〉  "
-        );
+        count++;
 
+        //3rd
+        monkeys[count] = new MonkeyObject();
+        monkeys[count].setMonkey(
+            "ʕ(▀ ⍡ ▀)ʔ",
+            "  \\___/ ",
+            "  <-2-> ",
+            "  〈  〉 "
+        );
+        monkeys[count].setMonkeyAnime(
+            "ʕ(▀ ⍡ ▀)ʔ",
+            "  \\_⎐_/ ",
+            "  <--->  ",
+            "   ⌋  ⌊  "
+        );
+        count++;
+
+        //4th
+        monkeys[count] = new MonkeyObject();
+        monkeys[count].setMonkey(
+            " ʕ ͡° ͜ʖ ° ͡ʔ ",
+            "   \\___/",
+            "   ==3== ",
+            "   _/ \\_"
+        );
+        monkeys[count].setMonkeyAnime(
+            " ʕ ͡° ͜ʖ ° ͡ʔ ",
+            "   \\_⍾_/ ",
+            "   ===== ",
+            "   〈  〉 "
+        );
+        count++;
+
+        //5th
+        monkeys[count] = new MonkeyObject();
+        monkeys[count].setMonkey(
+            " ʕ(◕‿◕✿)ʔ ",
+            "   \\_⍾_/ ",
+            "   ==4==  ",
+            "   _/ \\_  "
+        );
+        monkeys[count].setMonkeyAnime(
+            " ʕ(◕‿◕✿)ʔ ",
+            "   \\___/  ",
+            "   =====  ",
+            "    〈  〉  "
+        );
+        count++;
     }
 
     /*
@@ -114,6 +137,16 @@ class MonkeyList {
     }
 
     /*
+    Method to flip control value of monkey output
+     */
+    private void toggleAnime(int start, int end, boolean toggle) {
+        //toggle animation setting
+        for (int i = start; i < end; i++) {
+            monkeys[i].setAnime(toggle);
+        }
+    }
+
+    /*
     Method to support countdown song.
      */
     public void printPoem() throws InterruptedException {
@@ -123,26 +156,21 @@ class MonkeyList {
         //loop is key logic to allow printing monkeys horizontally according to countdown criteria
         for (int i = count; i >= 1; i--)   //start countdown according to monkeys in list
         {
-            //loop and control are to support simple animation
-            int delay = 3500; int delay_step = 700; boolean toggle = true;
+            //loop and control are to support animation
+            int delay = 3500; int delay_step = 700; boolean toggle = false;
             for (int sleep = 0; sleep < delay; sleep += delay_step ) {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 System.out.println(i + " little monkeys jumping on the bed...");
 
-                if (toggle) {
-                    printBodyPart(0, i, MonkeyObject.eyes);
-                    printBodyPart(0, i, MonkeyObject.chin);
-                    printBodyPart(0, i, MonkeyObject.body);
-                    printBodyPart(0, i, MonkeyObject.legs);
-                } else {
-                    printBodyPart(0, i, MonkeyObject.eyes2);
-                    printBodyPart(0, i, MonkeyObject.chin2);
-                    printBodyPart(0, i, MonkeyObject.body2);
-                    printBodyPart(0, i, MonkeyObject.legs2);
-                }
-                Thread.sleep(delay_step);   //delay
-                toggle = !toggle;           //flip toggle each pass
+                printBodyPart(0, i, MonkeyObject.eyes);
+                printBodyPart(0, i, MonkeyObject.chin);
+                printBodyPart(0, i, MonkeyObject.body);
+                printBodyPart(0, i, MonkeyObject.legs);
+
+                Thread.sleep(delay_step);           //delay
+                toggle = !toggle;                   //toggle value flips each pass
+                toggleAnime(0, i, toggle);    //use toggle value to change monkey anime
             }
         }
         //prints finishing messages
@@ -163,6 +191,7 @@ class MonkeyObject {
     static public final String chin = "chin";
     static public final String body = "body";
     static public final String legs = "legs";
+    //Animation body parts, slight variations
     static public final String eyes2 = "eyes2";
     static public final String chin2 = "chin2";
     static public final String body2 = "body2";
@@ -173,45 +202,106 @@ class MonkeyObject {
     //First string in HashMap is Name (eyes, chin, ...), Second string is Unicode value
     HashMap<String, String> monkey = new HashMap<>();
 
-    //Default monkey constructor has initial set of values, this is put in place to avoid empty set scenarios
+    //Animation control variables
+    boolean anime = false;      //animation is on
+    boolean standard = true;    //standard is used to flip, standard -> animation -> standard
+
+    /*
+    Constructor establishes initial set of values, this avoids empty monkey scenarios
+     */
     public MonkeyObject() {
+        this.MonkeyInit();
+    }
+
+    public MonkeyObject(boolean anime) {
+        this.MonkeyInit();
+        this.anime = true;
+        monkey.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
+        monkey.put(chin2, "  \\___/ ");
+        monkey.put(body2, "  -----  ");
+        monkey.put(legs2, "  ⌋   ⌊ " );
+    }
+
+    /*
+    Shared initializer, these times are set by both constructors
+     */
+    private void MonkeyInit() {
         //Add elements to the data table
         monkey.put(eyes,  "ʕง ͠° ͟ل͜ ͡°)ʔ ");
         monkey.put(chin,  "  \\_⏄_/ ");
         monkey.put(body,  "  --0--  ");
-        monkey.put(legs,  "  ⎛  ⎞   ");
-        monkey.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");
-        monkey.put(chin2, "  \\___/ ");
-        monkey.put(body2, "  -----  ");
-        monkey.put(legs2, "  ⌋  ⌊  " );
+        monkey.put(legs,  "  ⎛   ⎞  ");
     }
 
-    //A constructor with parameters to make your own monkey values
-    public MonkeyObject(String eyes, String chin, String body, String legs,
-                        String eyes2, String chin2, String body2, String legs2) {
-        // Add elements to the map
+    /*
+    "setter" is used to initialize values of an object
+     */
+    public void setMonkey(String eyes, String chin, String body, String legs) {
         monkey.put(MonkeyObject.eyes, eyes);
         monkey.put(MonkeyObject.chin, chin);
         monkey.put(MonkeyObject.body, body);
         monkey.put(MonkeyObject.legs, legs);
-        monkey.put(MonkeyObject.eyes2, eyes2);
-        monkey.put(MonkeyObject.chin2, chin2);
-        monkey.put(MonkeyObject.body2, body2);
-        monkey.put(MonkeyObject.legs2, legs2);
     }
 
-    //Override of toString, this most commonly used by System.out.println to get sensible data instead of an object
+    /*
+    2nd "setter" is used to initialize monkey animations
+     */
+    public void setMonkeyAnime(String eyes, String chin, String body, String legs) {
+        this.anime = true;  //if you use this "setter" animation is implied
+        monkey.put(MonkeyObject.eyes2, eyes);
+        monkey.put(MonkeyObject.chin2, chin);
+        monkey.put(MonkeyObject.body2, body);
+        monkey.put(MonkeyObject.legs2, legs);
+    }
+
+    /*
+    "setter" that allow user to control standard or animated output from "getters"
+     */
+    public void setAnime(boolean on) {
+        this.standard = !on;
+    }
+
+    /*
+    Override "or polymorphism" of system "toString" which is generated for every object
+    -- default "toString" returns a number representing the object
+    -- most often "toStrng" is used in conjunction with "System.out.println" to return sensible data
+     */
     public String toString() {
-        return monkey.get(eyes) + "\n" + monkey.get(chin) + "\n" + monkey.get(body) + "\n" + monkey.get(legs)+ "\n";
+        String out_string;
+
+        if (this.standard)
+            out_string = monkey.get(eyes) + "\n" + monkey.get(chin) + "\n" + monkey.get(body) + "\n" + monkey.get(legs)+ "\n";
+        else
+            out_string = monkey.get(eyes2) + "\n" + monkey.get(chin2) + "\n" + monkey.get(body2) + "\n" + monkey.get(legs2)+ "\n";
+
+        if (this.anime) this.standard = !this.standard;
+
+        return out_string;
     }
 
-    //This is same as calling toString, a "getter" is a commonly expected method in a Class
+    /*
+    "getter" is a commonly expected method used to return data from an Object
+     */
     public String getMonkey() {
         return toString();
     }
 
-    //This allows the extraction of a single portion of the monkey
+    /*
+    This "getter" allows the extraction of a single monkey body part
+     */
     public String getBodyPart(String bp) {
-        return monkey.get(bp);
+        String tag = bp;
+
+        //animation control
+        if (!this.standard) {
+            switch (bp) {
+                case eyes -> tag = eyes2;
+                case chin -> tag = chin2;
+                case body -> tag = body2;
+                case legs -> tag = legs2;
+                default -> throw new IllegalStateException("Unexpected value: " + bp);
+            }
+        }
+        return monkey.get(tag);
     }
 }
