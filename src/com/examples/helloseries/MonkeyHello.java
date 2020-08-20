@@ -1,5 +1,5 @@
 /*
-Creator: Nighthawk Coding Society Technical Developers
+Creator: Nighthawk Coding Society Developers
 Mini Lab Name: Monkey Faces
 Level: Easy
 */

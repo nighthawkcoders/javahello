@@ -213,6 +213,9 @@ class MonkeyObject {
         this.MonkeyInit();
     }
 
+    /*
+    Constructor establishes standard and alternate values for monkey body parts
+    */
     public MonkeyObject(boolean anime) {
         this.MonkeyInit();
         this.anime = true;
@@ -223,7 +226,7 @@ class MonkeyObject {
     }
 
     /*
-    Shared initializer, these times are set by both constructors
+    Shared initializer, these puts are shared by both constructors
      */
     private void MonkeyInit() {
         //Add elements to the data table
@@ -234,7 +237,7 @@ class MonkeyObject {
     }
 
     /*
-    "setter" is used to initialize values of an object
+    "setter" is used to initialize standard values of the monkey
      */
     public void setMonkey(String eyes, String chin, String body, String legs) {
         monkey.put(MonkeyObject.eyes, eyes);
@@ -244,7 +247,7 @@ class MonkeyObject {
     }
 
     /*
-    2nd "setter" is used to initialize monkey animations
+    2nd "setter" is used to initialize alternate values of monkey
      */
     public void setMonkeyAnime(String eyes, String chin, String body, String legs) {
         this.anime = true;  //if you use this "setter" animation is implied
@@ -269,11 +272,13 @@ class MonkeyObject {
     public String toString() {
         String out_string;
 
-        if (this.standard)
+        //control support toggling output string
+        if (this.standard)  //standard out
             out_string = monkey.get(eyes) + "\n" + monkey.get(chin) + "\n" + monkey.get(body) + "\n" + monkey.get(legs)+ "\n";
-        else
+        else                //alternate out
             out_string = monkey.get(eyes2) + "\n" + monkey.get(chin2) + "\n" + monkey.get(body2) + "\n" + monkey.get(legs2)+ "\n";
 
+        //if user sets anime, then this toggles between standard and alternate output
         if (this.anime) this.standard = !this.standard;
 
         return out_string;
