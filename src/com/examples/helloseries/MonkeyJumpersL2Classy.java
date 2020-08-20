@@ -137,16 +137,6 @@ class MonkeyList {
     }
 
     /*
-    Method to flip control value of monkey output
-     */
-    private void toggleAnime(int start, int end, boolean toggle) {
-        //toggle animation setting
-        for (int i = start; i < end; i++) {
-            monkeys[i].setAnime(toggle);
-        }
-    }
-
-    /*
     Method to support countdown song.
      */
     public void printPoem() throws InterruptedException {
@@ -179,8 +169,24 @@ class MonkeyList {
         System.out.println("             THE END              ");
     }
 
+    /*
+    Method to flip control value of monkey output
+    -- Note: Recursive method is a 'Unit 10' CSA requirement
+     */
+    private void toggleAnime(int start, int end, boolean toggle) {
+        if (start >= end)
+            return;
+        monkeys[start].setAnime(toggle);
+        toggleAnime(++start, end, toggle);  //recursive call, ++before is critical
+    }
+
 }
 
+/*
+Abstract Class contains properties of a single Anime
+-- Note: A base class (in this case Abstracts) is part of 'Unit 10' inheritance requirements
+-- Note: Abstract class does not stand alone
+ */
 abstract class Anime {
     //Anime data table
     //In CompSci HashMap is more well known as a Name-Value pair
@@ -252,6 +258,8 @@ abstract class Anime {
 
 /*
 Class contains properties of a single Monkey
+-- Note: A class that extends is performing 'Unit 10' required inheritance
+-- Note: A Monkey is-a Anime
  */
 class Monkey extends Anime {
     //These final values can be used publicly to easy setting off values
