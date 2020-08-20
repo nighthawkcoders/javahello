@@ -18,11 +18,12 @@ import java.util.HashMap;
 public class MonkeyJumpersL2Classy {
     public static void main(String[] args) throws InterruptedException {
         oop(); // introduction to method (this example is more like a function, why?)
-        //how would you print these monkeys vertically?
-        //add names to the monkeys
+        //how would you add methods to print monkeys vertically?
+        //add names or other properties to the monkeys
         //change list to ArrayList and make implementation dynamic, prove it!
-        //build a project with your ascii/unicode art logo, experiment with animation
-        //run you logo from shell (deployed java)
+        //add animation of monkey breaking head
+        //build a project with your own ascii/unicode art logo, experiment with animation
+        //run you logo from shell (deployed java), sell has properties to clear and improve animation
     }
 
     public static void oop() throws InterruptedException {
@@ -36,7 +37,7 @@ Class manages a list of monkeys
  */
 class MonkeyList {
     int count = 0;
-    MonkeyObject[] monkeys = new MonkeyObject[10];
+    MonkeyObject[] monkeys = new MonkeyObject[10]; //an array of Monkeys
 
     /*
     Constructor initializes a list monkey object
@@ -122,6 +123,7 @@ class MonkeyList {
         //loop is key logic to allow printing monkeys horizontally according to countdown criteria
         for (int i = count; i >= 1; i--)   //start countdown according to monkeys in list
         {
+            //loop and control are to support simple animation
             int delay = 3500; int delay_step = 700; boolean toggle = true;
             for (int sleep = 0; sleep < delay; sleep += delay_step ) {
                 System.out.print("\033[H\033[2J");
@@ -140,10 +142,9 @@ class MonkeyList {
                     printBodyPart(0, i, MonkeyObject.legs2);
                 }
                 Thread.sleep(delay_step);   //delay
-                toggle = !toggle;           //flip toggle
+                toggle = !toggle;           //flip toggle each pass
             }
         }
-
         //prints finishing messages
         System.out.println("No more monkeys jumping on the bed");
         System.out.println("0000000000000000000000000000000000");
