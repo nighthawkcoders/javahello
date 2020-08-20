@@ -181,6 +181,10 @@ class MonkeyList {
 
 }
 
+class Anime {
+
+}
+
 /*
 Class contains properties of a single Monkey
  */
