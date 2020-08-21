@@ -15,7 +15,7 @@ import java.util.HashMap;
     4. Study HashMap
     5. Look at StringBuilder
 */
-public class MonkeyJumpersL2Classy {
+public class MkyClassy {
     public static void main(String[] args) throws InterruptedException {
         oop(); // introduction to method (this example is more like a function, why?)
         //how would you add methods to print monkeys vertically?
@@ -35,14 +35,14 @@ public class MonkeyJumpersL2Classy {
 /*
 Class manages a list of monkeys
  */
-class MonkeyList {
+class MkyList {
     int count = 0;
     Monkey[] monkeys = new Monkey[10]; //an array of Monkeys
 
     /*
     Constructor initializes a list monkey object
      */
-    public MonkeyList() {
+    public MkyList() {
 
         //setup and array of monkeys
         //1st
@@ -187,11 +187,11 @@ Abstract Class contains properties of a single Anime
 -- Note: A base class (in this case Abstracts) is part of 'Unit 10' inheritance requirements
 -- Note: Abstract class does not stand alone
  */
-abstract class Anime {
+abstract class MkyAnime {
     //Anime data table
     //In CompSci HashMap is more well known as a Name-Value pair
     //First string in HashMap is Name, Second string is Unicode value
-    //-- in Anime we will typically use this to store part of the figure (eyes, legs, ,..)
+    //-- in MkyAnime we will typically use this to store part of the figure (eyes, legs, ,..)
     protected HashMap<String, String> anime;
 
     //Dictionary names of elements in Monkey 'body parts' data table
@@ -203,11 +203,9 @@ abstract class Anime {
     boolean animation = false;  //animation is on
     boolean standard = true;    //standard is used to flip, standard -> animation -> standard
 
-    //Object constructor
-    public Anime () {
+    public void MkyAnime () {
         anime = new HashMap<>();
     }
-
     /*
      "setter" that allow user to control standard or animated output from "getters"
       */
@@ -259,9 +257,9 @@ abstract class Anime {
 /*
 Class contains properties of a single Monkey
 -- Note: A class that extends is performing 'Unit 10' required inheritance
--- Note: A Monkey is-a Anime
+-- Note: A Monkey is-a MkyAnime
  */
-class Monkey extends Anime {
+class Mky extends MkyAnime {
     //These final values can be used publicly to easy setting off values
     static public final String eyes = Anime.std_dictionary[0];
     static public final String chin = Anime.std_dictionary[1];
@@ -276,7 +274,7 @@ class Monkey extends Anime {
     /*
     Constructor establishes initial set of values, this avoids empty monkey scenarios
      */
-    public Monkey() {
+    public Mky() {
         this.MonkeyInit();
     }
 
@@ -294,7 +292,7 @@ class Monkey extends Anime {
     /*
     Constructor establishes standard and alternate values for monkey body parts
     */
-    public Monkey(boolean animation) {
+    public Mky(boolean animation) {
         this.MonkeyInit();
         this.animation = animation;
         anime.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");

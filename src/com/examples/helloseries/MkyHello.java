@@ -5,7 +5,7 @@ Level: Easy
 */
 package com.examples.helloseries;
 
-public class MonkeyHello {
+public class MkyHello {
 
     public static void main(String[] args) {
         monkeys();  // introduction to method (this example is more like a function, why?)

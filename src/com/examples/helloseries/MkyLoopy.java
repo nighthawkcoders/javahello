@@ -12,7 +12,7 @@ How to build Monkey Jumper rhyme in code (Imperative Programming Style)
 3. Study loops and zero based counting
 4. Study two-dimensional array and referencing elements
 */
-public class MonkeyJumpersL1Loopy {
+public class MkyLoopy {
 
     public static void main(String[] args) {
         iterative();
