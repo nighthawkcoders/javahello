@@ -1,36 +1,35 @@
+package com.examples.helloseries;
 /*
 Creator: Nighthawk Coding Society
-Mini Lab Name: Monkey Jumpers
-Level: Easy
+Mini Lab Name: Hello Series, featuring Monkey Jumpers
+Level: Medium
 */
-package com.examples.helloseries;
 
-/*
-How to build Monkey Jumper rhyme in code (Imperative Programming Style)
-1. Build the entire rhyme Ten to One monkey in countdown, see sample
+/* Loopy - Monkey Faces using 2D Array and Loops
+How to build Monkey Jumper rhyme in code (this example is using Imperative Programming Style)
+1. Build the entire rhyme up to Ten monkeys counting down to One monkey in countdown
 2. Look at and learn about variable assignments
 3. Study loops and zero based counting
 4. Study two-dimensional array and referencing elements
 */
-public class MkyLoopy {
+class Loopy {
 
     public static void main(String[] args) {
-        iterative();
+        new Loopy();
         //how would you print these monkeys horizontally?
         //add a name to the monkeys and print either on top or below
         //start to think about a monkey as an object versus two-dimensional array
     }
 
-    public static void iterative()
+    public Loopy()
     {
-
-    // Setup 10 monkeys in the characters in a structure, be creative
+        // Setup 10 monkeys in the characters in a structure, be creative
 
         //Storing Data in 2D arrays
         String[][] monkeys = {
                 //Monkey 0
                 {
-                        "ʕง ͠° ͟ل͜ ͡°)ʔ ",      //[0][0] eyes
+                        "ʕง ͠° ͟ل͜ ͡°)ʔ ",     //[0][0] eyes
                         "  \\_⏄_/  ",      //[0][1] chin
                         "  --0--   ",       //[0][2] body
                         "  ⎛   ⎞   "        //[0][3] legs
@@ -116,7 +115,5 @@ public class MkyLoopy {
         System.out.println("0000000000000000000000000000000000");
         System.out.println("             THE END              ");
     }
-
-    //testing
 
 }

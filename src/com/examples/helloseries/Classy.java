@@ -1,23 +1,26 @@
+package com.examples.helloseries;
 /*
 Creator: Nighthawk Coding Society
-Mini Lab Name: Monkey Jumpers
-Level: Easy
+Mini Lab Name: Hello Series, featuring Monkey Jumpers
+Level: Medium
 */
-package com.examples.helloseries;
 
-import java.util.HashMap;
+import java.util.HashMap; //java library for managing data
 
-/*
-    How to build Monkey Jumper rhyme in code (OOP Programming Style)
-    1. Build the entire rhyme Seven to One monkey in countdown, see sample
-    2. Look at and learn about constructors
-    3. Study monkey object and list of monkeys
-    4. Study HashMap
-    5. Look at StringBuilder
+/* Classy (OOP Programming Style) - Animated Monkey Jumpers
+    1. Observe logic for 5 to 1 monkey in countdown and timer
+    2. Learn about constructors
+    3. Learn about an object and list of objects
+    4. Learn about HashMap (Name-Value pairs)
+    5. Learn about StringBuilder
 */
-public class MkyClassy {
+public class Classy {
+    /* main - entry point when testing independently
+     * Note 1,
+     * Note 2, this does not work in Repl.it Hello Series project.  Try it when directly after you start project in IntelliJ IDEA.
+     */
     public static void main(String[] args) throws InterruptedException {
-        oop(); // introduction to method (this example is more like a function, why?)
+        new Classy(); // call Classy
         //how would you add methods to print monkeys vertically?
         //add names or other properties to the monkeys
         //change list to ArrayList and make implementation dynamic, prove it!
@@ -26,23 +29,26 @@ public class MkyClassy {
         //run you logo from shell (deployed java), sell has properties to clear and improve animation
     }
 
-    public static void oop() throws InterruptedException {
+    /* Classy - entry point when making a Classy object
+     *
+     */
+    public Classy() throws InterruptedException {
         MonkeyList monkeyList = new MonkeyList();
         monkeyList.printPoem();
     }
 }
 
-/*
+/* MonkeList - data for program
 Class manages a list of monkeys
  */
-class MkyList {
+class MonkeyList {
     int count = 0;
     Monkey[] monkeys = new Monkey[10]; //an array of Monkeys
 
     /*
     Constructor initializes a list monkey object
      */
-    public MkyList() {
+    public MonkeyList() {
 
         //setup and array of monkeys
         //1st
@@ -50,70 +56,70 @@ class MkyList {
         //2nd
         monkeys[count] = new Monkey();    //All other Monkeys use setters to update monkey parts
         monkeys[count].setAnimeStandard(
-             "ʕ༼ ◕_◕ ༽ʔ",
-             "  \\_⎏_/ ",
-            "  ++1++ ",
-             "   ⌋ ⌊  "
+                "ʕ༼ ◕_◕ ༽ʔ",
+                "  \\_⎏_/ ",
+                "  ++1++ ",
+                "   ⌋ ⌊  "
         );
         monkeys[count].setAnimeAlternate(
-            "ʕ༼ ◕_◕ ༽ʔ",
-            "  \\___/ ",
-            "  +++++ ",
-            "  〈  〉 "
+                "ʕ༼ ◕_◕ ༽ʔ",
+                "  \\___/ ",
+                "  +++++ ",
+                "  〈  〉 "
         );
         count++;
 
         //3rd
         monkeys[count] = new Monkey();
         monkeys[count].setAnimeStandard(
-            "ʕ(▀ ⍡ ▀)ʔ",
-            "  \\___/ ",
-            "  <-2-> ",
-            "  〈  〉 "
+                "ʕ(▀ ⍡ ▀)ʔ",
+                "  \\___/ ",
+                "  <-2-> ",
+                "  〈  〉 "
         );
         monkeys[count].setAnimeAlternate(
-            "ʕ(▀ ⍡ ▀)ʔ",
-            "  \\_⎐_/ ",
-            "  <--->  ",
-            "   ⌋  ⌊  "
+                "ʕ(▀ ⍡ ▀)ʔ",
+                "  \\_⎐_/ ",
+                "  <--->  ",
+                "   ⌋  ⌊  "
         );
         count++;
 
         //4th
         monkeys[count] = new Monkey();
         monkeys[count].setAnimeStandard(
-            " ʕ ͡° ͜ʖ ° ͡ʔ ",
-            "   \\___/",
-            "   ==3== ",
-            "   _/ \\_"
+                " ʕ ͡° ͜ʖ ° ͡ʔ ",
+                "   \\___/",
+                "   ==3== ",
+                "   _/ \\_"
         );
         monkeys[count].setAnimeAlternate(
-            " ʕ ͡° ͜ʖ ° ͡ʔ ",
-            "   \\_⍾_/ ",
-            "   ===== ",
-            "   〈  〉 "
+                " ʕ ͡° ͜ʖ ° ͡ʔ ",
+                "   \\_⍾_/ ",
+                "   ===== ",
+                "   〈  〉 "
         );
         count++;
 
         //5th
         monkeys[count] = new Monkey();
         monkeys[count].setAnimeStandard(
-            " ʕ(◕‿◕✿)ʔ ",
-            "   \\_⍾_/ ",
-            "   ==4==  ",
-            "   _/ \\_  "
+                " ʕ(◕‿◕✿)ʔ ",
+                "   \\_⍾_/ ",
+                "   ==4==  ",
+                "   _/ \\_  "
         );
         monkeys[count].setAnimeAlternate(
-            " ʕ(◕‿◕✿)ʔ ",
-            "   \\___/  ",
-            "   =====  ",
-            "   〈  〉  "
+                " ʕ(◕‿◕✿)ʔ ",
+                "   \\___/  ",
+                "   =====  ",
+                "   〈  〉  "
         );
         count++;
     }
 
     /*
-    Simple print of the list of objects, how would you convert this toString method
+     Print the list of objects
      */
     public void print() {
         //setup loop to initialize each monkey
@@ -187,11 +193,11 @@ Abstract Class contains properties of a single Anime
 -- Note: A base class (in this case Abstracts) is part of 'Unit 10' inheritance requirements
 -- Note: Abstract class does not stand alone
  */
-abstract class MkyAnime {
+abstract class Anime {
     //Anime data table
     //In CompSci HashMap is more well known as a Name-Value pair
     //First string in HashMap is Name, Second string is Unicode value
-    //-- in MkyAnime we will typically use this to store part of the figure (eyes, legs, ,..)
+    //-- in Anime we will typically use this to store part of the figure (eyes, legs, ,..)
     protected HashMap<String, String> anime;
 
     //Dictionary names of elements in Monkey 'body parts' data table
@@ -203,9 +209,11 @@ abstract class MkyAnime {
     boolean animation = false;  //animation is on
     boolean standard = true;    //standard is used to flip, standard -> animation -> standard
 
-    public void MkyAnime () {
+    //Object constructor
+    public Anime () {
         anime = new HashMap<>();
     }
+
     /*
      "setter" that allow user to control standard or animated output from "getters"
       */
@@ -243,11 +251,11 @@ abstract class MkyAnime {
         //animation control
         if (!this.standard) {
             switch (dictName) {
-                case name0 -> lookup = alt_dictionary[0];
-                case name1 -> lookup = alt_dictionary[1];
-                case name2 -> lookup = alt_dictionary[2];
-                case name3 -> lookup = alt_dictionary[3];
-                default -> throw new IllegalStateException("Unexpected value: " + dictName);
+                case name0: lookup = alt_dictionary[0]; break;
+                case name1: lookup = alt_dictionary[1]; break;
+                case name2: lookup = alt_dictionary[2]; break;
+                case name3: lookup = alt_dictionary[3]; break;
+                default: throw new IllegalStateException("Unexpected value: " + dictName);
             }
         }
         return anime.get(lookup);
@@ -257,9 +265,9 @@ abstract class MkyAnime {
 /*
 Class contains properties of a single Monkey
 -- Note: A class that extends is performing 'Unit 10' required inheritance
--- Note: A Monkey is-a MkyAnime
+-- Note: A Monkey is-a Anime
  */
-class Mky extends MkyAnime {
+class Monkey extends Anime {
     //These final values can be used publicly to easy setting off values
     static public final String eyes = Anime.std_dictionary[0];
     static public final String chin = Anime.std_dictionary[1];
@@ -274,7 +282,7 @@ class Mky extends MkyAnime {
     /*
     Constructor establishes initial set of values, this avoids empty monkey scenarios
      */
-    public Mky() {
+    public Monkey() {
         this.MonkeyInit();
     }
 
@@ -292,7 +300,7 @@ class Mky extends MkyAnime {
     /*
     Constructor establishes standard and alternate values for monkey body parts
     */
-    public Mky(boolean animation) {
+    public Monkey(boolean animation) {
         this.MonkeyInit();
         this.animation = animation;
         anime.put(eyes2, "ʕง ͠° ͟ل͜ ͡°)ʔ ");

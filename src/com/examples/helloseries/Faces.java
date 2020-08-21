@@ -1,20 +1,25 @@
+package com.examples.helloseries;
 /*
-Creator: Nighthawk Coding Society Developers
-Mini Lab Name: Monkey Faces
+Creator: Nighthawk Coding Society
+Mini Lab Name: Hello Series, featuring Monkey Jumpers
 Level: Easy
 */
-package com.examples.helloseries;
 
-public class MkyHello {
+/* Faces - Monkey Faces using System.out.println()
+This is just a little increment from Hello World, only differences is we are representing an "object" that requires multiple lines.
+1. This contains one line of the Monkey Jumpers poem
+2. It contains ASCII and more, Unicode is superset to ASCII
+*/
+public class Faces {
 
     public static void main(String[] args) {
-        monkeys();  // introduction to method (this example is more like a function, why?)
-        //make 10 characters of your own
+        new Faces();  // introduction to method (this example is more like a function, why?)
+        //make up to 10 characters of your own
         //how would you store monkeys in variables?
         //explore variables and see where you can get building a poem
     }
 
-    public static void monkeys()
+    public Faces()
     {
         /*Lookup and learn about ascii and unicode
         a lot of ascii is on keyboard a lot of the extended characters (unicode) are less known
