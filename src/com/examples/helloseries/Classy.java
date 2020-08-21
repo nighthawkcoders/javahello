@@ -19,8 +19,8 @@ public class Classy {
      * Note 1,
      * Note 2, this does not work in Repl.it Hello Series project.  Try it when directly after you start project in IntelliJ IDEA.
      */
-    public static void main(String[] args) throws InterruptedException {
-        new Classy(); // call Classy
+    public static void main(String[] args)  {
+        new MonkeyList().printPoem();
         //how would you add methods to print monkeys vertically?
         //add names or other properties to the monkeys
         //change list to ArrayList and make implementation dynamic, prove it!
@@ -32,9 +32,8 @@ public class Classy {
     /* Classy - entry point when making a Classy object
      *
      */
-    public Classy() throws InterruptedException {
-        MonkeyList monkeyList = new MonkeyList();
-        monkeyList.printPoem();
+    public Classy() {
+        new MonkeyList().printPoem();
     }
 }
 
@@ -145,7 +144,7 @@ class MonkeyList {
     /*
     Method to support countdown song.
      */
-    public void printPoem() throws InterruptedException {
+    public void printPoem() {
         //prints starting message
         System.out.println("Monkey Jumpers Poem in Java Classy");
 
@@ -164,7 +163,13 @@ class MonkeyList {
                 printBodyPart(0, i, Monkey.body);
                 printBodyPart(0, i, Monkey.legs);
 
-                Thread.sleep(delay_step);           //delay
+                try {
+                    Thread.sleep(delay_step);           //delay
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();  // set interrupt flag
+                    e.printStackTrace();
+                }
+
                 toggle = !toggle;                   //toggle value flips each pass
                 toggleAnime(0, i, toggle);    //use toggle value to change monkey anime
             }
@@ -249,14 +254,19 @@ abstract class Anime {
         String lookup = dictName;
 
         //animation control
-        if (!this.standard) {
-            switch (dictName) {
-                case name0: lookup = alt_dictionary[0]; break;
-                case name1: lookup = alt_dictionary[1]; break;
-                case name2: lookup = alt_dictionary[2]; break;
-                case name3: lookup = alt_dictionary[3]; break;
-                default: throw new IllegalStateException("Unexpected value: " + dictName);
+        try {
+            if (!this.standard) {
+                switch (dictName) {
+                    case name0: lookup = alt_dictionary[0]; break;
+                    case name1: lookup = alt_dictionary[1]; break;
+                    case name2: lookup = alt_dictionary[2]; break;
+                    case name3: lookup = alt_dictionary[3]; break;
+                    default: throw new IllegalStateException("Unexpected value: " + dictName);
+                }
             }
+        } catch (IllegalStateException e) {
+            Thread.currentThread().interrupt();  // set interrupt flag
+            e.printStackTrace();
         }
         return anime.get(lookup);
     }
