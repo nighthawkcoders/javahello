@@ -1,4 +1,5 @@
-package com.examples.helloseries;/*
+package com.examples.helloseries;
+/*
 Creator: Nighthawk Coding Society
 Mini Lab Name: Hello Series, featuring Monkey Jumpers
 Level: Easy
@@ -58,9 +59,8 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
                 System.out.println("Hello, World of Monkeys!");
                 break;
             case 2:
-                //Using a Class: AP CSA Unit 2
-                //Laucn constructure from Printy.java
-                new MonkeyPrint();
+                //Static method call from Printy.java
+                Printy.main(null);
                 break;
             case 3:
                 //Using a Class: AP CSA Unit 2
