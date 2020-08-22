@@ -1,35 +1,42 @@
 package com.examples.helloseries;
+
 /*
-Creator: Nighthawk Coding Society
-Mini Lab Name: Hello Series, featuring Monkey Jumpers
-Level: Medium
-*/
+ * Creator: Nighthawk Coding Society
+ * Mini Lab Name: Hello Series, featuring Monkey Jumpers
+ * Level: Medium
+ *
+ * Exploration Ideas
+ * 1. Add methods or logic to print monkeys vertically
+ * 2. Add names or other properties to the monkeys
+ * 3. Add to poem, ie animation of monkey breaking head
+ * 4. Build a project with your own ascii/unicode art or logo, experiment with animation
+ * 5. Learn to deploy your Java class or JAR to run animation from shell (deployed java).  FYI, the shell has properties (character sequences ) to clear and improve animation.
+ *
+ * Learning Considerations
+ * Note: Classy (OOP Programming Style)
+ * Project Focus: Animated Monkey Jumpers
+ * A. Observe logic for 5 to 1 monkey in countdown and timer
+ * B. Learn about constructors
+ * C. Learn about an object and list of objects
+ * D. Learn about HashMap (Name-Value pairs)
+ * E. Learn about StringBuilder
+ */
 
 import java.util.HashMap; //java library for managing data
 
-/* Classy (OOP Programming Style) - Animated Monkey Jumpers
-    1. Observe logic for 5 to 1 monkey in countdown and timer
-    2. Learn about constructors
-    3. Learn about an object and list of objects
-    4. Learn about HashMap (Name-Value pairs)
-    5. Learn about StringBuilder
-*/
+/**
+ * Classy - a Java utility Class that supports entry point for execution
+ */
 public class Classy {
-    /* main - entry point when testing independently
-     * Note 1,
-     * Note 2, this does not work in Repl.it Hello Series project.  Try it when directly after you start project in IntelliJ IDEA.
+    /** main
+     * entry point when testing independently
      */
     public static void main(String[] args)  {
-        new MonkeyList().printPoem();
-        //how would you add methods to print monkeys vertically?
-        //add names or other properties to the monkeys
-        //change list to ArrayList and make implementation dynamic, prove it!
-        //add animation of monkey breaking head
-        //build a project with your own ascii/unicode art logo, experiment with animation
-        //run you logo from shell (deployed java), sell has properties to clear and improve animation
+        new MonkeyList().printPoem();   //a new monkey list and output in one step
     }
 
-    /* Classy - entry point when making a Classy object
+    /** Classy
+     * constructor and entry point when instantiating a Classy object
      *
      */
     public Classy() {
@@ -37,30 +44,29 @@ public class Classy {
     }
 }
 
-/* MonkeList - data for program
-Class manages a list of monkeys
+/**
+ * Class for Monkeys: a list of Monkeys
+ * As well as Actions for Monkeys: print Poem
  */
 class MonkeyList {
-    int count = 0;
-    Monkey[] monkeys = new Monkey[10]; //an array of Monkeys
+    int count = 0;                     //Primitives: AP CSA Unit 1 - Integer
+    Monkey[] monkeys = new Monkey[10]; //Arrays: AP CSA Unit 6 - User Defined Class
 
-    /*
-    Constructor initializes a list monkey object
+    /**
+     * Constructor initializes a list monkey object
      */
     public MonkeyList() {
-
-        //setup and array of monkeys
-        //1st
+        //1st monkey
         monkeys[count++] = new Monkey(true );  //Default Monkey and update list count
-        //2nd
+        //2nd monkey
         monkeys[count] = new Monkey();    //All other Monkeys use setters to update monkey parts
-        monkeys[count].setAnimeStandard(
+        monkeys[count].setAnimeStandard(   //Standard monkey parts
                 "ʕ༼ ◕_◕ ༽ʔ",
                 "  \\_⎏_/ ",
                 "  ++1++ ",
                 "   ⌋ ⌊  "
         );
-        monkeys[count].setAnimeAlternate(
+        monkeys[count].setAnimeAlternate(   //Alternate monkey parts (for animation)
                 "ʕ༼ ◕_◕ ༽ʔ",
                 "  \\___/ ",
                 "  +++++ ",
@@ -117,32 +123,32 @@ class MonkeyList {
         count++;
     }
 
-    /*
-     Print the list of objects
+    /**
+     * Print the list of objects
      */
     public void print() {
         //setup loop to initialize each monkey
-        for (Monkey monkey : monkeys) {
-            if (monkey != null) {   // check to see if monkey is initialized
+        for (Monkey monkey : monkeys) { //Iteration: AP CSA Unit 4 - For-each loop
+            if (monkey != null) {   //check to see if monkey is initialized
                 System.out.println(monkey);
             }
         }
     }
 
-    /*
-    Method to extract and print same body part for all monkeys in list
+    /**
+     * Extract and print the same body part for all monkeys in list
      */
     private void printBodyPart(int start, int end, String bp) {
         //build output string
         StringBuilder line_for_output = new StringBuilder();
-        for (int i = start; i < end; i++) {
+        for (int i = start; i < end; i++) { //Iteration: AP CSA Unit 4 - For loop
             line_for_output.append(String.format("%-12s \t", monkeys[i].getAnimePart(bp)));
         }
         System.out.println(line_for_output);
     }
 
-    /*
-    Method to support countdown song.
+    /**
+     * Print the countdown poem
      */
     public void printPoem() {
         //prints starting message
@@ -154,49 +160,51 @@ class MonkeyList {
             //loop and control are to support animation
             int delay = 3500; int delay_step = 700; boolean toggle = false;
             for (int sleep = 0; sleep < delay; sleep += delay_step ) {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-                System.out.println(i + " little monkeys jumping on the bed...");
+                System.out.print("\033[H\033[2J"); //this sends special sequence to clear console/terminal window
+                System.out.flush();                //this makes sure previous line happens right away
+                System.out.println(i + " little monkeys jumping on the bed...");    //formatted message in poem
 
-                printBodyPart(0, i, Monkey.eyes);
+                //printPoem has helper method within the class to line up body parts horizontally
+                printBodyPart(0, i, Monkey.eyes);   //each call passes parameters which match poem prgression
                 printBodyPart(0, i, Monkey.chin);
                 printBodyPart(0, i, Monkey.body);
                 printBodyPart(0, i, Monkey.legs);
 
-                try {
-                    Thread.sleep(delay_step);           //delay
+                try {   //certain methods (ie Time.sleep) have error handline
+                    Thread.sleep(delay_step);           //animation delay
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();  // set interrupt flag
-                    e.printStackTrace();
+                    Thread.currentThread().interrupt(); //set interrupt flag
+                    e.printStackTrace();                //trace error
                 }
 
-                toggle = !toggle;                   //toggle value flips each pass
+                toggle = !toggle; //Primitive: Boolean value flips each pass with negation (!)
                 toggleAnime(0, i, toggle);    //use toggle value to change monkey anime
             }
         }
-        //prints finishing messages
+        //prints finishing messages when poem is done, loop have exited before reaching here
         System.out.println("No more monkeys jumping on the bed");
         System.out.println("0000000000000000000000000000000000");
         System.out.println("             THE END              ");
     }
 
-    /*
-    Method to flip control value of monkey output
-    -- Note: Recursive method is a 'Unit 10' CSA requirement
+    /**
+     * Method to flip control value of monkey output
+     * --  Recursion: AP CSA Unit 10
      */
     private void toggleAnime(int start, int end, boolean toggle) {
-        if (start >= end)
+        if (start >= end)   //terminal condition exits recursion, similar to middle portion of for loop
             return;
-        monkeys[start].setAnime(toggle);
-        toggleAnime(++start, end, toggle);  //recursive call, ++before is critical
+        monkeys[start].setAnime(toggle); //this tells monkey to alternate between standard and alternate anime
+        toggleAnime(++start, end, toggle);  //recursive call, ++ must be before variable name
     }
 
 }
 
-/*
-Abstract Class contains properties of a single Anime
--- Note: A base class (in this case Abstracts) is part of 'Unit 10' inheritance requirements
--- Note: Abstract class does not stand alone
+/**
+ * Abstract Class contains properties of a single Anime (generic, not specific to Monkeys)
+ *  --  Inheritance: AP CSA Unit 9
+ * A base class (in this case an 'abstract base class) is part of inheritance requirement
+ * An 'abstract class' needs an inheritor to make it useful
  */
 abstract class Anime {
     //Anime data table
@@ -226,8 +234,8 @@ abstract class Anime {
         this.standard = !on;
     }
 
-    /*
-    standard "setter" is used to initialize standard values of the monkey
+    /**
+     * standard "setter" is used to initialize standard values of the monkey
      */
     public void setAnimeStandard(String value0, String value1, String value2, String value3) {
         anime.put(name0, value0);
@@ -236,8 +244,8 @@ abstract class Anime {
         anime.put(name3, value3);
     }
 
-    /*
-    alternate "setter" is used to initialize standard values of the monkey
+    /**
+     * alternate "setter" is used to initialize standard values of the monkey
      */
     public void setAnimeAlternate(String value0, String value1, String value2, String value3) {
         this.animation = true;  //if you use this "setter" animation is implied
@@ -247,8 +255,8 @@ abstract class Anime {
         anime.put(alt_dictionary[3], value3);
     }
 
-    /*
-    This "getter" allows the extraction of a single monkey body part
+    /**
+     * "getter" allows the extraction of a single monkey body part
      */
     public String getAnimePart(String dictName) {
         String lookup = dictName;
@@ -256,13 +264,13 @@ abstract class Anime {
         //animation control
         try {
             if (!this.standard) {
-                switch (dictName) {
-                    case name0: lookup = alt_dictionary[0]; break;
-                    case name1: lookup = alt_dictionary[1]; break;
-                    case name2: lookup = alt_dictionary[2]; break;
-                    case name3: lookup = alt_dictionary[3]; break;
-                    default: throw new IllegalStateException("Unexpected value: " + dictName);
-                }
+                lookup = switch (dictName) {
+                    case name0 -> alt_dictionary[0];
+                    case name1 -> alt_dictionary[1];
+                    case name2 -> alt_dictionary[2];
+                    case name3 -> alt_dictionary[3];
+                    default -> throw new IllegalStateException("Unexpected value: " + dictName);
+                };
             }
         } catch (IllegalStateException e) {
             Thread.currentThread().interrupt();  // set interrupt flag
@@ -272,10 +280,11 @@ abstract class Anime {
     }
 }
 
-/*
-Class contains properties of a single Monkey
--- Note: A class that extends is performing 'Unit 10' required inheritance
--- Note: A Monkey is-a Anime
+/**
+ * Class contains properties of a single Monkey
+ *  --  Inheritance: AP CSA Unit 9
+ *  A class that extends is Java way of performing inheritance
+ *  Though inheritance a Monkey is-a Anime, but an Anime is-not-a Monkey
  */
 class Monkey extends Anime {
     //These final values can be used publicly to easy setting off values
@@ -289,15 +298,15 @@ class Monkey extends Anime {
     static private final String body2 = Anime.alt_dictionary[2];
     static private final String legs2 = Anime.alt_dictionary[3];
 
-    /*
-    Constructor establishes initial set of values, this avoids empty monkey scenarios
+    /**
+     * Constructor establishes initial set of values
      */
     public Monkey() {
         this.MonkeyInit();
     }
 
-    /*
-    Shared initializer, these puts are shared by both constructors
+    /**
+     * Shared initializer, these puts are shared by both constructors
      */
     private void MonkeyInit() {
         //Add elements to the data table
@@ -307,8 +316,8 @@ class Monkey extends Anime {
         anime.put(legs,  "  ⎛   ⎞  ");
     }
 
-    /*
-    Constructor establishes standard and alternate values for monkey body parts
+    /**
+     * This constructor establishes standard and alternate default for monkey body parts
     */
     public Monkey(boolean animation) {
         this.MonkeyInit();
@@ -319,10 +328,11 @@ class Monkey extends Anime {
         anime.put(legs2, "  ⌋   ⌊ " );
     }
 
-    /*
-    Override "or polymorphism" of system "toString" which is generated for every object
-    -- default "toString" returns a number representing the object
-    -- most often "toStrng" is used in conjunction with "System.out.println" to return sensible data
+    /**
+     * Override "or polymorphism" of system "toString" which is generated for every object
+     * -- default "toString" returns a number representing the object
+     * -- most often "toStrng" is used in conjunction with "System.out.println" to return sensible data
+     * -- this is on every AP test I have seen
      */
     public String toString() {
         String out_string;
