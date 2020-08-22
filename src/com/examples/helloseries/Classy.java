@@ -264,6 +264,7 @@ abstract class Anime {
         //animation control
         try {
             if (!this.standard) {
+                //Preferred method
                 lookup = switch (dictName) {
                     case name0 -> alt_dictionary[0];
                     case name1 -> alt_dictionary[1];
@@ -271,6 +272,15 @@ abstract class Anime {
                     case name3 -> alt_dictionary[3];
                     default -> throw new IllegalStateException("Unexpected value: " + dictName);
                 };
+                /* //Repl.it required
+                switch (dictName) {
+                    case name0: lookup = alt_dictionary[0]; break;
+                    case name1: lookup = alt_dictionary[1]; break;
+                    case name2: lookup = alt_dictionary[2]; break;
+                    case name3: lookup = alt_dictionary[3]; break;
+                    default: throw new IllegalStateException("Unexpected value: " + dictName);
+                }
+                 */
             }
         } catch (IllegalStateException e) {
             Thread.currentThread().interrupt();  // set interrupt flag
