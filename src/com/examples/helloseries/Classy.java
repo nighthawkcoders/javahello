@@ -45,8 +45,8 @@ public class Classy {
 }
 
 /**
- * Class for Monkeys: a list of Monkeys
- * As well as Actions for Monkeys: print Poem
+ * Class for Monkeys: a list of Monkey objects
+ * As well as method to print the Poem
  */
 class MonkeyList {
     int count = 0;                     //Primitives: AP CSA Unit 1 - Integer

@@ -1,35 +1,62 @@
 package com.examples.helloseries;
 /*
-Creator: Nighthawk Coding Society
-Mini Lab Name: Hello Series, featuring Monkey Jumpers
-Level: Medium
-*/
+ * Creator: Nighthawk Coding Society
+ * Mini Lab Name: Hello Series, featuring Monkey Jumpers
+ * Level: Medium
+ *
+ * Exploration Ideas
+ * 1. Build more or entire rhyme for the "Monkey Jumpers" countdown poem
+ * 2. Add names or other properties to the monkeys
+ * 3. Print these monkeys horizontally
+ *
+ * Learning Considerations
+ * Note: Loopy (Imperative Programming Style)
+ * Project Focus: Animated Monkey Jumpers
+ * A. Observe variable assignments
+ * B. Study loops and zero based counting
+ * C. Study two-dimensional (2D) arrays
+ * D. Learn about and describe Imperative and Procedural Programming
+ * E. Build a design diagram on a monkey as an object versus two-dimensional array
+ */
 
-/* Loopy - Monkey Faces using 2D Array and Loops
-How to build Monkey Jumper rhyme in code (this example is using Imperative Programming Style)
-1. Build the entire rhyme up to Ten monkeys counting down to One monkey in countdown
-2. Look at and learn about variable assignments
-3. Study loops and zero based counting
-4. Study two-dimensional array and referencing elements
-*/
-class Loopy {
-
-    public static void main(String[] args) {
-        new Loopy();
-        //how would you print these monkeys horizontally?
-        //add a name to the monkeys and print either on top or below
-        //start to think about a monkey as an object versus two-dimensional array
+/**
+ * A Java utility Class that supports entry point for execution
+ */
+public class Loopy {
+    /** main
+     * entry point when testing independently
+     */
+    public static void main(String[] args)  {
+        new MonkeyLoop().printPoem();   //a new monkey list and output in one step
     }
 
-    public Loopy()
-    {
-        // Setup 10 monkeys in the characters in a structure, be creative
+    /** Loop
+     * constructor and entry point when instantiating from another class
+     */
+    public Loopy() {
+        new MonkeyLoop().printPoem();
+    }
+}
 
+/**
+ * Class for Monkeys: a 2D array of Monkeys
+ * As well as method to print the Poem
+ */
+class MonkeyLoop {
+    //The area between class definition and the 1st method is where we keep data for object in Java
+    String [][] monkeys;    //2D Array: AP CSA Unit 8: 2D array of strings
+                            //2D array is like a grid [x][y]
+                            // or like a spreadsheet [row][column]
+
+    /**
+     * Constructor initializes a 2D array of Monkeys
+     */
+    public MonkeyLoop() {
         //Storing Data in 2D arrays
-        String[][] monkeys = {
+        monkeys = new String[][]{   //2D array above is just a name, "new" makes a container ("object")
                 //Monkey 0
                 {
-                        "ʕง ͠° ͟ل͜ ͡°)ʔ ",     //[0][0] eyes
+                        "ʕง ͠° ͟ل͜ ͡°)ʔ ",      //[0][0] eyes
                         "  \\_⏄_/  ",      //[0][1] chin
                         "  --0--   ",       //[0][2] body
                         "  ⎛   ⎞   "        //[0][3] legs
@@ -64,36 +91,38 @@ class Loopy {
                 },
 
         };
+    }
 
-    /*
-    loop pull first element out of each slot
-    logic 0,0, 0,1, 0,2, 0,3, 1,0, 1,1, 1,2, 1,3, 2,0, 2,1, 2,2, 2,3, ....
-    */
-
+    /**
+     * Loop and print monkeys in array
+     * logic sequence as follows:
+     * println 5,0, println 5,1, println 5,2, println 5,3
+     * print blank line
+     * println 4,0, println 4,1, println 4,2, println 4,3
+     * print blank line
+     * ... repeat until you reach zero  ...
+     * println 0,0, println 0,1, println 0,2, println 0,3
+     */
+    public void printPoem() {
         //begin the poem
         System.out.println();
         System.out.println("Monkey Jumpers Poem in Java Loopy");
 
-        int num = 0;
-
-        int monkeyCount = monkeys.length;        //how many monkeys do we have defined above?
-        for (int i = monkeyCount; i >= 1; i--)   //loop through logic of code according to the monkey count
+        // monkeys (non-primitive) defined in constructor knows its length
+        int monkeyCount = monkeys.length;
+        for (int i = monkeyCount; i >= 1; i--)  //loops through 2D array length backwards
         {
 
             //this print statement shows current count of Monkeys
-            //   Two key concepts:
-            //   1. A concatenation (+) of the loop variable and string to form a countdown message
+            //  concatenation (+) of the loop variable and string to form a countdown message
             System.out.println(i + " little monkeys jumping on the bed...");
 
             //how many separate parts are there in a monkey monkey?
-            for (int row = 0; row < monkeyCount; row++)  //cycles through rows of 2d array
-            {
+            for (int row = 0; row < monkeyCount; row++) {  //cycles through "cells" of 2d array
 
-            /*cycles through columns to print
-            each monkey part by part, will eventually print entire column*/
-                for (int col = 0; col < monkeys[row].length; col++)
-
-                {
+                /*cycles through columns to print
+                each monkey part by part, will eventually print entire column*/
+                for (int col = 0; col < monkeys[row].length; col++) {
 
                     // prints specific part of the monkey from the column
                     System.out.print(monkeys[row][col] + " ");
@@ -106,7 +135,7 @@ class Loopy {
                 System.out.println();
             }
 
-            //countdown for poem, changes output and loop control by decrementing monkeyCount variable
+            //countdown for poem, decrementing monkeyCount variable by 1
             monkeyCount -= 1;
         }
 
