@@ -24,19 +24,12 @@ package com.examples.helloseries;
 /**
  * A Java utility Class that supports entry point for execution
 */
-public class Faces {
+public class Printy {
     /** main
      * entry point when testing independently
      */
     public static void main(String[] args)  {
         new MonkeyPrint();   //Using Objects: AP CSA Unit 2
-    }
-
-    /**
-     * constructor and entry point when instantiating from another class
-     */
-    public Faces() {
-        new MonkeyPrint();
     }
 }
 

@@ -9,23 +9,24 @@ Level: Easy
  */
 import java.util.Scanner; //java library for user input
 
-/* Main - entry point class for this project  
+/** Main - entry point class for this project
 1.'C' nad Java have a main function/method that is the ENTRY into code exectuion. Both language need a file to contain that ENTRY method/function.  Common convention for 'C': main.c.  Convention for Java: Main.java.
 2. Repl.it requires a "Main.java" file and a main class ("public Class Main").  Inside the class it expects a method named "public static void main(String[] args)"."
 3. Conventions and structures are part of a programming language and the tools you use.  Python people like to pick on these Java conventions, saying they are difficult.  What do you think? 
 */
 public class Main {   //Everything in Java is inside a class, Squigs, Squigalies, or Curly brackets denote a code block in Java.  This is the beginning of class code block.
 
-    /* main - entry point method for this project
+    /** main - entry point method for this project
     main is the entry or pri·mor·di·al code block for Java
     */
-    static public void main(String[] args) throws InterruptedException {  // open squig begins the method 
+    static public void main(String[] args)  {  // open squig begins the method
         menu(); // 'coder' defined method/function call to a different code block
     } // close squig ends the method.  What did this method do?
 
-    /* menu - first method that actually perform Java code
+    /**
+     * menu - first method that actually perform Java code
      */
-    public static void menu() throws InterruptedException {
+    public static void menu() {
         //Primitive types: AP CSA Unit 1 
         int selection;  //user selection variable of type Inteteger
 
@@ -58,18 +59,18 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
                 break;
             case 2:
                 //Using a Class: AP CSA Unit 2
-                //Laucn Constructure from Faces.java
-                new Faces();
+                //Laucn Constructure from Printy.java
+                Printy.main(null);
                 break;
             case 3:
                 //Using a Class: AP CSA Unit 2
                 //Laucn Constructure from Loopy.java
-                new Loopy();
+                Loopy.main(null);
                 break;
             case 4:
                 //Using a Class: AP CSA Unit 2
                 //Laucn Constructure from Classy.java
-                new Classy();
+                Classy.main(null);
                 break;
 
             default:
