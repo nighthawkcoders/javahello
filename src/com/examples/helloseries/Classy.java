@@ -25,7 +25,7 @@ package com.examples.helloseries;
 import java.util.HashMap; //java library for managing data
 
 /**
- * Classy - a Java utility Class that supports entry point for execution
+ * A Java utility Class that supports entry point for execution
  */
 public class Classy {
     /** main
@@ -36,7 +36,7 @@ public class Classy {
     }
 
     /** Classy
-     * constructor and entry point when instantiating a Classy object
+     * constructor and entry point when instantiating from another class
      *
      */
     public Classy() {
