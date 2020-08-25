@@ -24,7 +24,7 @@ package com.examples.helloseries;
 /**
  * A Java utility Class that supports entry point for execution
 */
-public class Printy {
+public class Stringy {
     /** main
      * entry point when testing independently
      */

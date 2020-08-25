@@ -40,10 +40,10 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
         System.out.println("Choose from these choices");
         System.out.println("-------------------------\n");
         System.out.println("1 - Hello");
-        System.out.println("2 - Printy");
-        System.out.println("3 - Loopy");
-        System.out.println("4 - Classy Print");
-        System.out.println("5 - Classy Poem");
+        System.out.println("2 - Strings");
+        System.out.println("3 - Loops");
+        System.out.println("4 - Class toString()");
+        System.out.println("5 - Class Poem");
         System.out.println("0 - Quit");
 
         //Using Scanner Class to get integer as input
@@ -56,11 +56,11 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
                 return;
             case 1:
                 //Prints message to console/terminal
-                System.out.println("Hello, World of Monkeys!");
+                System.out.println("Hello, World!");
                 break;
             case 2:
                 //Static method call from Printy.java
-                Printy.main(null);
+                Stringy.main(null);
                 break;
             case 3:
                 //Using a Class: AP CSA Unit 2
