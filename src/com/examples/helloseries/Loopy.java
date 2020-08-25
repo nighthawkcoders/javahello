@@ -108,35 +108,25 @@ class MonkeyLoop {
         System.out.println();
         System.out.println("Monkey Jumpers Poem in Java Loopy");
 
-        // monkeys (non-primitive) defined in constructor knows its length
-        int monkeyCount = monkeys.length;
-        for (int i = monkeyCount; i >= 1; i--)  //loops through 2D array length backwards
-        {
+        // cycles through 2D array backwards
+        for (int i = monkeys.length; i >= 1; i--) {
 
             //this print statement shows current count of Monkeys
             //  concatenation (+) of the loop variable and string to form a countdown message
             System.out.println(i + " little monkeys jumping on the bed...");
 
-            //how many separate parts are there in a monkey monkey?
-            for (int row = 0; row < monkeyCount; row++) {  //cycles through "cells" of 2d array
+            // cycle through monkeys that are left in poem countdown
+            for (int row = 0; row < i; row++) {
 
-                /*cycles through columns to print
-                each monkey part by part, will eventually print entire column*/
+                // cycles through monkey part by part
                 for (int col = 0; col < monkeys[row].length; col++) {
-
-                    // prints specific part of the monkey from the column
-                    System.out.print(monkeys[row][col] + " ");
-
-                    //this is new line between separate parts
-                    System.out.println();
+                    // prints specific part of the monkey from the 2D cell
+                    System.out.println(monkeys[row][col] + " ");
                 }
 
                 //this new line gives separation between stanza of poem
                 System.out.println();
             }
-
-            //countdown for poem, decrementing monkeyCount variable by 1
-            monkeyCount -= 1;
         }
 
         //out of all the loops, prints finishing messages
