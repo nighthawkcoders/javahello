@@ -44,6 +44,7 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
         System.out.println("3 - Loops");
         System.out.println("4 - Class toString()");
         System.out.println("5 - Class Poem");
+        System.out.println("6 - Random Selection");
         System.out.println("0 - Quit");
 
         //Using Scanner Class to get integer as input
@@ -78,6 +79,9 @@ public class Main {   //Everything in Java is inside a class, Squigs, Squigalies
                 MonkeyList ml = new MonkeyList();
                 ml.print();
                 ml.printPoem();
+                break;
+            case 6:
+                Randomy.main(null);
                 break;
 
             default:
